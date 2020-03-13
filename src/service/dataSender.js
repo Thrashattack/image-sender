@@ -1,7 +1,7 @@
-import axios from `axios`;
-import FormData, {getHeaders} from 'form-data';
+const axios = require(`axios`);
+const FormData = require('form-data');
 
-export default class DataSender {
+module.exports = class DataSender {
     _endpoint = 'http://172.16.10.71/dev/incontre/cliente/avatar/';
     _formData = new FormData();
     
@@ -9,7 +9,7 @@ export default class DataSender {
         imageBinary = _readImage(imagePath);
         this._formData.append(`image`, imageBinary);
         await axios.post(this._endpoint, this._formData, {
-            headers: getHeaders(this._formData)
+            headers: FormData.getHeaders(this._formData)
         });
     }
 

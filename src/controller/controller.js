@@ -1,7 +1,7 @@
-import ImageDTO from `../model/imageDto`;
-import DataSender from `../service/dataSender`;
+const ImageDTO = require(`../model/imageDto`);
+const DataSender = require(`../service/dataSender`);
 
-export default class Controller {
+module.exports = class Controller {
 
     receiveImage = (req, res) => {
         const base64string = req.body.base64string;

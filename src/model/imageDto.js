@@ -1,7 +1,7 @@
-import base64Img from `base64-img`;
+const base64Img = require(`base64-img`);
 
 
-export default class ImageDTO {    
+module.exports = class ImageDTO {    
     FilePath = `../tmp/`;
 
     constructor() {
