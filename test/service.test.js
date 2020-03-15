@@ -14,11 +14,13 @@ chai.use(chaiHttp);
 ReadFile = path => fs.readFileSync(path).toString();
 
 
+const base64string = ReadFile('test/base64.snapshot.test.txt');
+const imgBinary = ReadFile('test/image.snapshot.test.jpg');
+
+
 describe("Service Tests", () => {
     describe("base64 to binary", () => {
         it("Must convert a base64 string into a image binary - Expect ", done => {
-            const base64string = ReadFile('test/base64.snapshot.test.txt');
-            const imgBinary = ReadFile('test/image.snapshot.test.jpg');
             const testResult = Base64toBinaryImage(base64string);
             chai.expect(testResult, `Base64toBinaryImage isn't correct\n\n`)
                 .to
@@ -29,19 +31,18 @@ describe("Service Tests", () => {
     });
 
     describe("send data", () => {
-        it("Shall not throw exception", done => {
-            const imgBinary = ReadFile('image.snapshot.test.jpg');
-            try {
-                chai.expect(SendData(imgBinary), "Send Data is Throwing exception")
+        it("Shall not throw exception", done => SendData(imgBinary)
+            .then(response => {
+                chai.expect(response, "SendData isn't awnsering")
                     .to
                     .not
-                    .throws(); 
-            } catch (err) {
-                console.log(err);
-            }
-                
-            done();
-        });
+                    .contains("Can't send the image");
+                done();
+            }).catch(err => {
+                chai.assert(false == true, "Send Data is Throwing exception: " + err);
+                done();
+            })
+        );
     })
 
 });
