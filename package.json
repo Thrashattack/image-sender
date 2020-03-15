@@ -2,7 +2,7 @@
   "name": "image_receiver",
   "version": "1.0.0",
   "description": "Image Receiver Microservice",
-  "main": "index.js",
+  "main": "server.js",
   "author": "Carlos Cunha",
   "license": "MIT",
   "dependencies": {
@@ -11,10 +11,23 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "file-system": "^2.2.2",
     "form-data": "^3.0.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^2.0.1",
     "nodemon": "^2.0.2"
   },
-  "scripts": {"dev": "nodemon index.js --watch ."}
+  "scripts": {
+    "dev": "nodemon server.js --watch .",
+    "test": "mocha --reporter spec"
+  },
+  "directories": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Thrashattack/image-sender"
+  }
 }
